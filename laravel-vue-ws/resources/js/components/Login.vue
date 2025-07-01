@@ -1,65 +1,56 @@
 <template>
-    <div class="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
+    <div
+        class="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-200 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl">
             <!-- Logo/Header -->
-            <div class="text-center">
-                <h2 class="mt-6 text-3xl font-bold text-gray-900">
-                    Welcome to Chat Room
-                </h2>
-                <p class="mt-2 text-sm text-gray-600">
-                    Please sign in to continue
-                </p>
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-extrabold text-gray-800">Welcome to Chat Room</h2>
+                <p class="mt-2 text-sm text-gray-600">Please sign in to continue</p>
             </div>
 
             <!-- Login Form -->
-            <form class="mt-8 space-y-6" @submit.prevent="handleLogin">
-                <div class="rounded-md shadow-sm space-y-4">
+            <form @submit.prevent="handleLogin" class="space-y-6">
+                <div class="space-y-4">
                     <div>
-                        <label for="username" class="sr-only">Username</label>
-                        <input id="username" v-model="username" type="text" required
-                            class="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                            placeholder="Enter your username" />
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <InputText id="email" v-model="email" type="email" placeholder="Enter your email"
+                            class="w-full" />
                     </div>
 
                     <div>
-                        <label for="room" class="sr-only">Chat Room</label>
-                        <select id="room" v-model="selectedRoom"
-                            class="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm">
-                            <option value="" disabled>Select a chat room</option>
-                            <option value="general">General</option>
-                            <option value="tech">Tech</option>
-                            <option value="random">Random</option>
-                        </select>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <Password id="password" v-model="password" placeholder="Enter your password" class="w-full"
+                            toggleMask />
+                    </div>
+
+                    <div>
+                        <label for="room" class="block text-sm font-medium text-gray-700 mb-1">Chat Room</label>
+                        <Dropdown id="room" v-model="selectedRoom" :options="rooms" optionLabel="label"
+                            optionValue="value" placeholder="Select a chat room" class="w-full" />
                     </div>
                 </div>
 
-                <div>
-                    <button type="submit"
-                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-stone-900 hover:bg-stone-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
-                        Join Chat Room
-                    </button>
-                </div>
+                <Button type="submit" label="Join Chat Room" class="w-full p-button-primary" />
             </form>
 
-            <!-- Optional: Recent Rooms or Stats -->
-            <div class="mt-6">
+            <!-- Optional Stats Section -->
+            <div class="mt-10">
                 <div class="relative">
                     <div class="absolute inset-0 flex items-center">
                         <div class="w-full border-t border-gray-300"></div>
                     </div>
                     <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white text-gray-500">
-                            Active Rooms
-                        </span>
+                        <span class="bg-white px-2 text-gray-500">Active Stats</span>
                     </div>
                 </div>
-                <div class="mt-6 grid grid-cols-2 gap-3">
-                    <div class="text-center text-sm text-gray-500">
-                        <span class="block font-medium text-gray-900">15</span>
+
+                <div class="mt-6 grid grid-cols-2 gap-4 text-center text-sm text-gray-600">
+                    <div>
+                        <span class="block text-lg font-bold text-gray-800">15</span>
                         Online Users
                     </div>
-                    <div class="text-center text-sm text-gray-500">
-                        <span class="block font-medium text-gray-900">3</span>
+                    <div>
+                        <span class="block text-lg font-bold text-gray-800">3</span>
                         Active Rooms
                     </div>
                 </div>
@@ -70,15 +61,26 @@
 
 <script setup>
 import { ref } from 'vue';
+import router from '../router';
+import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
+import Dropdown from 'primevue/dropdown';
+import Button from 'primevue/button';
 
-const username = ref('');
+const email = ref('');
+const password = ref('');
 const selectedRoom = ref('');
+const rooms = [
+    { label: 'General', value: 'general' },
+    { label: 'Tech', value: 'tech' },
+    { label: 'Random', value: 'random' }
+];
 
 const handleLogin = () => {
-    // Handle login/join room logic here
-    console.log('Joining room:', {
-        username: username.value,
-        room: selectedRoom.value
-    });
+    if (email.value && password.value && selectedRoom.value) {
+        router.push(`/chat-room/${encodeURIComponent(email.value)}/${selectedRoom.value}`);
+    } else {
+        alert('Please enter your email, password, and select a chat room');
+    }
 };
 </script>

@@ -1,11 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import App from '../components/App.vue';
+import ChatRoom from '../page/ChatRoom.vue';
+import Login from '../components/Login.vue';
 
 const routes = [
   {
     path: '/',
-    name: 'App',
-    component: App,
+    name: 'login',
+    component: Login,
+  }, {
+    path: '/chat-room/:username/:room',
+    name: 'chatRoom',
+    component: ChatRoom,
   },
   // Add more routes here as needed
 ];

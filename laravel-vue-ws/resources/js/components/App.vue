@@ -1,12 +1,9 @@
 <template>
-  <router-view>
-    <Login />
-  </router-view>
+  <router-view />
 </template>
 
 <script setup>
-// import { ref } from 'vue';
-import Login from './Login.vue';
+// No need to import Login here
 </script>
 
 <style>
