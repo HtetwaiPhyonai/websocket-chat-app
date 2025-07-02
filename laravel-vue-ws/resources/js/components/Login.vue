@@ -31,6 +31,7 @@
                 </div>
 
                 <Button type="submit" label="Join Chat Room" class="w-full p-button-primary" />
+                <!-- Toast should be placed once at the app root (App.vue), not here -->
             </form>
 
             <!-- Optional Stats Section -->
@@ -66,10 +67,12 @@ import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Dropdown from 'primevue/dropdown';
 import Button from 'primevue/button';
+import { useToast } from 'primevue';
 
 const email = ref('');
 const password = ref('');
 const selectedRoom = ref('');
+const toast = useToast();
 const rooms = [
     { label: 'General', value: 'general' },
     { label: 'Tech', value: 'tech' },
@@ -77,10 +80,11 @@ const rooms = [
 ];
 
 const handleLogin = () => {
-    if (email.value && password.value && selectedRoom.value) {
+    if (email.value == 'youngartic.ru@gmail.com' && password.value == '111111' && selectedRoom.value == 'general') {
         router.push(`/chat-room/${encodeURIComponent(email.value)}/${selectedRoom.value}`);
+        toast.add({ severity: 'success', summary: 'Success Message', detail: 'login Succcess', life: 3000 });
     } else {
-        alert('Please enter your email, password, and select a chat room');
+        toast.add({ severity: 'error', summary: 'Error Message', detail: 'Login Fail!', life: 3000 });
     }
 };
 </script>
