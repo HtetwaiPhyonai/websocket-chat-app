@@ -7,9 +7,11 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@laravel/echo-vue": "^2.1.6",
         "@vitejs/plugin-vue": "^4.5.0",
         "autoprefixer": "^10.4.14",
         "axios": "^1.6.1",
+        "laravel-echo": "^1.19.0",
         "laravel-vite-plugin": "^1.0.0",
         "postcss": "^8.4.31",
         "tailwindcss": "^3.3.5",
@@ -22,6 +24,7 @@
         "pinia": "^3.0.3",
         "primeicons": "^7.0.0",
         "primevue": "^4.3.5",
+        "pusher-js": "^8.4.0",
         "vue-router": "^4.5.1"
     }
 }
