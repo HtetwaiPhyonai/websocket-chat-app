@@ -43,7 +43,7 @@
                     <div class="relative flex justify-center text-sm">
                         <p class="bg-white px-2 text-gray-500">
                             Don't have an account?
-                            <router-link to="/register">Register here</router-link>
+                            <router-link class="text-indigo-600 hover:underline" to="/register">Register here</router-link>
                         </p>
                     </div>
                     <div class="relative flex justify-center text-sm">
