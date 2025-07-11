@@ -1,11 +1,21 @@
 <template>
-  <router-view />
-  <Toast />
+  <div class="flex min-h-screen">
+    <!-- <Sidebar v-if="showSidebar" /> -->
+    <div class="flex-1 overflow-y-auto">
+      <router-view />
+      <Toast />
+    </div>
+  </div>
 </template>
 
 <script setup>
-// No need to import Login here
-import Toast from 'primevue/toast';
+// import Sidebar from './Sidebar.vue'
+import Toast from 'primevue/toast'
+import { useRoute } from 'vue-router'
+
+// const route = useRoute()
+// const hideOnRoutes = ['/login', '/register']
+// const showSidebar = !hideOnRoutes.includes(route.path)
 </script>
 
 <style>
