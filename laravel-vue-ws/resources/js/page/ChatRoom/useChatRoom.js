@@ -158,22 +158,22 @@ export function useChatRoom() {
     messages.value = [];
 
     // Update user's room preference
-    try {
-      await axios.post('/api/user/update-room', {
-        room_id: newRoomId
-      }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('auth_token')}`
-        }
-      });
+    // try {
+    //   await axios.post('/api/user/update-room', {
+    //     room_id: newRoomId
+    //   }, {
+    //     headers: {
+    //       Authorization: `Bearer ${localStorage.getItem('auth_token')}`
+    //     }
+    //   });
 
-      // Update localStorage
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
-      user.chat_room = newRoomId;
-      localStorage.setItem('user', JSON.stringify(user));
-    } catch (error) {
-      console.error('Room switch error:', error);
-    }
+    //   // Update localStorage
+    //   const user = JSON.parse(localStorage.getItem('user') || '{}');
+    //   user.chat_room = newRoomId;
+    //   localStorage.setItem('user', JSON.stringify(user));
+    // } catch (error) {
+    //   console.error('Room switch error:', error);
+    // }
 
     // Fetch new room messages and setup WebSocket
     await fetchMessages();
@@ -204,6 +204,13 @@ export function useChatRoom() {
     });
     router.push('/login');
   }
+
+  const isSidebarOpen = ref(true)
+
+  const toggleSidebar = () => {
+    isSidebarOpen.value = !isSidebarOpen.value
+  }
+
 
   return {
     currentUser,

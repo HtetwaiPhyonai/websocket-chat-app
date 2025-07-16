@@ -110,13 +110,12 @@ async function handleLogin() {
         });
 
         const data = await response.json();
-        console.log(data);
         
 
         if (response.ok) {
             localStorage.setItem('auth_token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
-            router.push('/chat-room');
+            router.push('/home');
             toast.add({ severity: 'success', summary: 'Success', detail: 'Login Success', life: 3000 });
         } else {
             error.value = data.message || 'Login failed';
